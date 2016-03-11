@@ -34,16 +34,6 @@ async function getNamesFromPage(page, sort = 'downloads') {
   return $('.card .card-name').map((i, el) => $(el).text().trim()).get();
 }
 
-async function getAllNames() {
-  return gather();
-
-  async function gather(count = 1, allNames = []) {
-    const names = await getNamesFromPage(count);
-    if (names.length) return gather(count + 1, allNames.concat(names));
-    else return allNames;
-  }
-}
-
 function getThemesFromNames(names) {
   const ee = new EventEmitter();
   sequential(names.slice());
@@ -60,9 +50,11 @@ function getThemesFromNames(names) {
   }
 }
 
-export {
-  getThemeFromName,
-  getNamesFromPage,
-  getAllNames,
-  getThemesFromNames
-};
+function get(input) {
+  if (typeof input === 'number') return getNamesFromPage(input);
+  if (typeof input === 'string') return getThemeFromName(input);
+  if (Array.isArray(input)) return getThemesFromNames(input);
+  else throw Error('Invalid parameter for atom-themes .get()');
+}
+
+export {get};
