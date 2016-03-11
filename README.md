@@ -26,8 +26,12 @@ The promise will return an object with the theme's metadata.
 Sample output:
 ```js
 { name: 'monokai',
+  author: 
+   { name: 'kevinsawicki',
+     picture: 'https://github.com/kevinsawicki.png' },
+  version: '0.18.0',
   description: 'monokai',
-  downloads: '329120',
+  downloads: '329124',
   stars: '657',
   images: [ 'https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png' ] }
 ```

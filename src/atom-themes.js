@@ -8,15 +8,21 @@ function getDom(uri, qs = {}) {
 
 async function getThemeFromName(name) {
   const $ = await getDom(`https://atom.io/themes/${name}`);
-  const f = $().find.bind($('.package-card')); // Awkward
-  const description = txt(f('.card-name'));
-  const downloads = txt(f('[aria-label="Downloads"]')).replace(',', '');
-  const stars = txt(f('.package-card .social-count'));
-  const images = $('.readme img').map((i, el) =>
-    $(el).attr('data-canonical-src')
-  ).get();
-
-  return {name, description, downloads, stars, images};
+  const f = $().find.bind($('.card')); // Awkward
+  return {
+    name,
+    author: {
+      name: txt(f('.author')),
+      picture: f('img.gravatar').attr('src')
+    },
+    version: txt(f('[aria-label*="version"]')),
+    description: txt(f('.card-name')),
+    downloads: txt(f('[aria-label*="ownload"]')).replace(',', ''),
+    stars: txt(f('.package-card .social-count')),
+    images: $('.readme img').map((i, el) =>
+      $(el).attr('data-canonical-src')
+    ).get()
+  };
 
   function txt($el) {return $el.text().trim();}
 }
