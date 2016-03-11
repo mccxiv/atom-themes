@@ -20,7 +20,6 @@ In the example above, we obtain an array of theme names from the third page of [
 
 ### Fetch a theme
 ```js
-// Get the monokai theme
 themes.get('monokai').then((theme) => console.log(theme));
 ```
 The promise will return an object with the theme's metadata.  
