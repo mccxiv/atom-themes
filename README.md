@@ -1,10 +1,6 @@
 # Yay, it's the atom-themes library!
 Obtain info on the available themes for the Atom editor.
 
-## Todo
-- [x] Add sorting options
-- [ ] Add option to grab readme (requires extra GitHub request)
-
 ## ⚛ Installation
 Download: ``` npm i --save atom-themes ```
 ```
@@ -23,6 +19,7 @@ themes.get(input, options);
 `options`: Optional configuration object. Sorting only has an effect when fetching pages.  
 `options.sort`: One of `'downloads'`, `'stars'`, `'created_at'`, or `'updated_at'`.  
 `options.direction`: The sorting direction, defaults to `'desc'`.
+`options.readme`: Boolean. Whether or not to grab the repo's readme. Requires more requests.
 
 ### Fetch theme names on a specific page
 ```js

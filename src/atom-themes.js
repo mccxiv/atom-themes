@@ -6,11 +6,19 @@ function getDom(uri, qs = {}) {
   return request({uri, qs, transform: (body) => cheerio.load(body)});
 }
 
-async function getThemeFromName(name) {
+async function getReadme(owner, repo) {
+  const uri = `https://api.github.com/repos/${owner}/${repo}/readme`;
+  const headers = {'User-Agent': 'request-promise'};
+  const readmeMeta = await request({uri, headers, json: true});
+  return request({uri: readmeMeta.download_url, headers});
+}
+
+async function getThemeFromName(name, {readme}) {
   const $ = await getDom(`https://atom.io/themes/${name}`);
   const f = $().find.bind($('.card')); // Awkward
-  return {
+  const theme = {
     name,
+    repo: $('.package-meta li:first-child a').attr('href'),
     author: {
       name: txt(f('.author')),
       picture: f('img.gravatar').attr('src')
@@ -23,6 +31,10 @@ async function getThemeFromName(name) {
       $(el).attr('data-canonical-src')
     ).get()
   };
+
+  if (readme) theme.readme = await getReadme(theme.author.name, name);
+
+  return theme;
 
   function txt($el) {return $el.text().trim();}
 }
@@ -56,8 +68,8 @@ function getThemesFromNames(names) {
 
 function get(input, opts) {
   if (typeof input === 'number') return getNamesFromPage(input, opts);
-  if (typeof input === 'string') return getThemeFromName(input);
-  if (Array.isArray(input)) return getThemesFromNames(input);
+  if (typeof input === 'string') return getThemeFromName(input, opts);
+  if (Array.isArray(input)) return getThemesFromNames(input, opts);
   else throw Error('Invalid parameter for atom-themes .get()');
 }
 
