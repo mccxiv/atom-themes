@@ -33,7 +33,6 @@ async function getAllNames() {
 
   async function gather(count = 1, allNames = []) {
     const names = await getNamesFromPage(count);
-    console.log('fetched page ' + count);
     if (names.length) return gather(count + 1, allNames.concat(names));
     else return allNames;
   }
