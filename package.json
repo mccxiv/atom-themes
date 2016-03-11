@@ -2,10 +2,10 @@
   "name": "atom-themes",
   "description": "API and scraper to traverse the Atom themes database",
   "version": "0.0.1",
-  "main": "./lib/atom-themes.js",
+  "main": "./compiled/atom-themes.js",
   "scripts": {
     "test": "node test.js",
-    "autocompile": "babel --watch --plugins transform-runtime --presets es2015,stage-0 -d lib/ src/"
+    "autocompile": "babel --watch --plugins transform-runtime --presets es2015,stage-0 -d compiled/ src/"
   },
   "dependencies": {
     "cheerio": "^0.20.0",
