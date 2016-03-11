@@ -4,7 +4,6 @@
   "version": "0.0.1",
   "main": "./compiled/atom-themes.js",
   "scripts": {
-    "test": "node test.js",
     "autocompile": "babel --watch --plugins transform-runtime --presets es2015,stage-0 -d compiled/ src/"
   },
   "dependencies": {
