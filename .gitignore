@@ -1,0 +1,6 @@
+# Project stuff
+/node_modules/
+/lib/
+
+# Developer stuff
+/.idea/
