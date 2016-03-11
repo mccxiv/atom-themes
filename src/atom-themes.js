@@ -13,7 +13,7 @@ async function getReadme(owner, repo) {
   return request({uri: readmeMeta.download_url, headers});
 }
 
-async function getThemeFromName(name, {readme}) {
+async function getThemeFromName(name, {readme} = {}) {
   const $ = await getDom(`https://atom.io/themes/${name}`);
   const f = $().find.bind($('.card')); // Awkward
   const theme = {
