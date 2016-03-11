@@ -2,8 +2,8 @@
 Obtain info on the available themes for the Atom editor.
 
 ## Todo
-- [] Add sorting options
-- [] Add option to grab readme (requires extra GitHub request)
+- [ ] Add sorting options
+- [ ] Add option to grab readme (requires extra GitHub request)
 
 ## ⚛ Installation
 Download: ``` npm i --save atom-themes ```
