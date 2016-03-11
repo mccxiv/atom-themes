@@ -2,6 +2,7 @@
   "name": "atom-themes",
   "description": "API and scraper to traverse the Atom themes database",
   "version": "0.0.1",
+  "license": "ISC",
   "main": "./compiled/atom-themes.js",
   "scripts": {
     "autocompile": "babel --watch --plugins transform-runtime --presets es2015,stage-0 -d compiled/ src/"

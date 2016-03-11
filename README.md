@@ -62,3 +62,7 @@ Passing an array will return an event emitter object. Listen to its `theme` and 
 Objects will be fetched sequentially, not in parallel.  
 The order in which the events fire is predictable.  
 For long lists such as fetching the entire database, this operation will obviously take a long time.
+
+---
+
+© 2016 Andrea Stella, ISC license.
