@@ -1,6 +1,7 @@
 # Project stuff
 /node_modules/
 /src/
+/test/
 
 # Developer stuff
 /.idea/
