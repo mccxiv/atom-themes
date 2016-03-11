@@ -2,7 +2,7 @@
 Obtain info on the available themes for the Atom editor.
 
 ## Todo
-- [ ] Add sorting options
+- [x] Add sorting options
 - [ ] Add option to grab readme (requires extra GitHub request)
 
 ## ⚛ Installation
