@@ -27,9 +27,13 @@ async function getThemeFromName(name) {
   function txt($el) {return $el.text().trim();}
 }
 
-async function getNamesFromPage(page, sort = 'downloads') {
+async function getNamesFromPage(page, {sort, direction}) {
+  // Can't have multiple default properties inside of parameter object :(
+  sort = sort || 'downloads';
+  direction = direction || 'desc';
+  console.log(sort, direction);
   const url = 'https://atom.io/themes/list';
-  const query = {direction: 'desc', page, sort};
+  const query = {page, sort, direction};
   const $ = await getDom(url, query);
   return $('.card .card-name').map((i, el) => $(el).text().trim()).get();
 }
@@ -50,8 +54,8 @@ function getThemesFromNames(names) {
   }
 }
 
-function get(input) {
-  if (typeof input === 'number') return getNamesFromPage(input);
+function get(input, opts) {
+  if (typeof input === 'number') return getNamesFromPage(input, opts);
   if (typeof input === 'string') return getThemeFromName(input);
   if (Array.isArray(input)) return getThemesFromNames(input);
   else throw Error('Invalid parameter for atom-themes .get()');

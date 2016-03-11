@@ -11,9 +11,18 @@ Download: ``` npm i --save atom-themes ```
 const themes = require('atom-themes');
 ```
 
-*Browser version?* -  Nope. We can't scrap cross domain
+*Browser version?* -  Nope. We can't scrape cross domain
+
+---
 
 ## ⚛ The .get method
+```
+themes.get(input, options);
+```
+`input`: Number, string or array. Check below for explanations.  
+`options`: Optional configuration object. Sorting only has an effect when fetching pages.  
+`options.sort`: One of `'downloads'`, `'stars'`, `'created_at'`, or `'updated_at'`.  
+`options.direction`: The sorting direction, defaults to `'desc'`.
 
 ### Fetch theme names on a specific page
 ```js
@@ -39,6 +48,8 @@ Sample output:
   stars: '657',
   images: [ 'https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png' ] }
 ```
+
+---
 
 ## ⚛ Other helpers
 
