@@ -1,6 +1,10 @@
 # Yay, it's the atom-themes library!
 Obtain info on the available themes for the Atom editor.
 
+## Todo
+- [] Add sorting options
+- [] Add option to grab readme (requires extra GitHub request)
+
 ## ⚛ Installation
 Download: ``` npm i --save atom-themes ```
 ```
@@ -26,7 +30,7 @@ The promise will return an object with the theme's metadata.
 Sample output:
 ```js
 { name: 'monokai',
-  author: 
+  author:
    { name: 'kevinsawicki',
      picture: 'https://github.com/kevinsawicki.png' },
   version: '0.18.0',
