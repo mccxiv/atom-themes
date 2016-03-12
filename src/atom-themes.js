@@ -39,7 +39,7 @@ async function getThemeFromName(name, {readme} = {}) {
   function txt($el) {return $el.text().trim();}
 }
 
-async function getNamesFromPage(page, {sort, direction}) {
+async function getNamesFromPage(page, {sort, direction} = {}) {
   // Can't have multiple default properties inside of parameter object :(
   sort = sort || 'downloads';
   direction = direction || 'desc';
@@ -73,4 +73,4 @@ function get(input, opts) {
   else throw Error('Invalid parameter for atom-themes .get()');
 }
 
-export {get};
+export default {get};
