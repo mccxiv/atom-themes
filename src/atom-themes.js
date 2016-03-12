@@ -73,4 +73,4 @@ function get(input, opts) {
   else throw Error('Invalid parameter for atom-themes .get()');
 }
 
-export default {get};
+export {get};
