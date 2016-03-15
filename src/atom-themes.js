@@ -73,14 +73,14 @@ async function getNamesFromPage(page, {sort, direction} = {}) {
   return $('.card .card-name').map((i, el) => $(el).text().trim()).get();
 }
 
-function getThemesFromNames(names) {
+function getThemesFromNames(names, opts) {
   const ee = new EventEmitter();
   sequential(names.slice());
   return ee;
 
   async function sequential(toFetch) {
     if (toFetch.length) {
-      const theme = await getThemeFromName(toFetch[0]);
+      const theme = await getThemeFromName(toFetch[0], opts);
       ee.emit('theme', theme);
       toFetch.shift();
       sequential(toFetch);
