@@ -17,7 +17,9 @@ async function getReadme(owner, repo) {
 }
 
 async function getImageMeta({url}) {
-  const img = await Jimp.read(url);
+  try {var img = await Jimp.read(url);}
+  catch(e) {return arguments[0]}
+
   const rgb = ColorThief.getColor(img);
   const palette = ColorThief.getPalette(img, 8);
   const rgbObject = {r: rgb[0], g: rgb[1], b: rgb[2]};

@@ -60,78 +60,51 @@ With options:
 - `readme: true` - Include the repository's readme. Requires extra API call.
 - `images: true` - Include image metadata such as size and colors.
   - Causes extra network requests.
-  - Detects if the theme is dark or light.
-  - The image palette is made of 6-10 colors.
+  - Detects if the image's background is dark or light.
+  - The image palette contains 6-10 colors.
+  - :warning: Only supported filetypes will have metadata. (None for svg, gif, etc)
 
 
 ```js
 // themes.get('monokai', {readme: true, images: true})
 
-{
-  "name": "monokai",
-  "repo": "https://github.com/kevinsawicki/monokai",
+{{
+  "name": "seti-ui",
+  "repo": "https://github.com/jesseweed/seti-ui",
   "author": {
-    "name": "kevinsawicki",
-    "image": "https://github.com/kevinsawicki.png"
+    "name": "jesseweed",
+    "image": "https://github.com/jesseweed.png"
   },
-  "description": "monokai",
-  "downloads": "329935",
-  "stars": "657",
+  "description": "seti-ui",
+  "downloads": "298692",
+  "stars": "980",
   "images": [
     {
-      "url": "https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png",
+      "url": "https://badges.gitter.im/Join%20Chat.svg"
+    },
+    {
+      "url": "https://github.com/jesseweed/seti-ui/raw/master/screenshot.png",
       "dimensions": {
-        "width": 1414,
-        "height": 1002
+        "width": 881,
+        "height": 852
       },
       "background": {
         "isDark": true,
-        "color": {
-          "r": 37,
-          "g": 45,
-          "b": 37
-        }
+        "color": {"r": 20, "g": 21, "b": 26}
       },
       "palette": [
-        {
-          "r": 37,
-          "g": 45,
-          "b": 37
-        },
-        {
-          "r": 219,
-          "g": 197,
-          "b": 177
-        },
-        {
-          "r": 100,
-          "g": 206,
-          "b": 209
-        },
-        {
-          "r": 114,
-          "g": 120,
-          "b": 106
-        },
-        {
-          "r": 105,
-          "g": 117,
-          "b": 165
-        },
-        {
-          "r": 103,
-          "g": 67,
-          "b": 65
-        },
-        {
-          "r": 72,
-          "g": 75,
-          "b": 98
-        }
+        {"r": 20, "g": 20, "b": 26},
+        {"r": 182, "g": 165, "b": 142},
+        {"r": 87, "g": 165, "b": 193},
+        {"r": 70, "g": 92 ,"b": 113},
+        {"r": 76, "g": 121, "b": 159},
+        {"r": 104, "g": 71, "b": 45},
+        {"r": 70, "g": 87, "b": 74}
       ]
-    }
+    },
+    ...
   ],
-  "readme": "# Monokai theme\n\nA monokai syntax theme for Atom.\n\nOriginally converted from the [TextMate](http://www.monokai.nl/blog/wp-content/asdev/Monokai.tmTheme)\ntheme using the [TextMate bundle converter](http://atom.io/docs/latest/converting-a-text-mate-theme).\n\n![](https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png)\n"
+  "readme": "# Seti UI\n\n[![Join the chat at https://gitter.im/jesseweed/seti-ui](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jesseweed/seti-ui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\nA dark colored UI theme for Atom with custom file icons. [Seti Syntax](https://atom.io/themes/seti-syntax) also available.\n\n![Screenshot](https://github.com/jesseweed/seti-ui/raw/master/screenshot.png)\n\n\n### Custom App Icons\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/circular/circular-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/circular)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/rounded/rounded-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/rounded/)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/squared/squared-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/squared/)\n\n### Installation\n\n#### Atom Package Manager (APM)\n```bash\napm install seti-ui\n```\n\n#### Git clone\n```bash\ncd ~/.atom/packages\ngit clone https://github.com/jesseweed/seti-ui --depth=1\n```\n\n### Currently Supported File Icons\n* Bower\n* Coffescript\n* CSS\n* EJS\n* Favicon\n* Go\n* Grunt\n* Gulp\n* Handlebars\n* HTML\n* Image\n* Jade\n* Javascript\n* JSON\n* Julia\n* Less\n* LICENSE\n* Markdown\n* Mustache\n* PHP\n* Procfile\n* Python\n* React\n* Ruby\n* Sass\n* Stache\n* Stylus\n* Text\n* Typescript\n* XML\n* YML\n"
 }
 
 ```
