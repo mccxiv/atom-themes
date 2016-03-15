@@ -1,5 +1,8 @@
 import request from 'request-promise';
 import cheerio from 'cheerio';
+import Jimp from 'jimp';
+import ColorThief from 'color-thief-jimp';
+import TinyColor from 'tinycolor2';
 import EventEmitter from 'events';
 
 function getDom(uri, qs = {}) {
@@ -13,7 +16,26 @@ async function getReadme(owner, repo) {
   return request({uri: readmeMeta.download_url, headers});
 }
 
-async function getThemeFromName(name, {readme} = {}) {
+async function getImageMeta({url}) {
+  const img = await Jimp.read(url);
+  const rgb = ColorThief.getColor(img);
+  const palette = ColorThief.getPalette(img, 8);
+  const rgbObject = {r: rgb[0], g: rgb[1], b: rgb[2]};
+  return {
+    url,
+    dimensions: {
+      width: img.bitmap.width,
+      height: img.bitmap.height
+    },
+    background: {
+      isDark: TinyColor(rgbObject).isDark(),
+      color: rgbObject
+    },
+    palette: palette.map((rgb) => {return {r: rgb[0], g: rgb[1], b: rgb[2]}})
+  }
+}
+
+async function getThemeFromName(name, opts = {}) {
   const $ = await getDom(`https://atom.io/themes/${name}`);
   const f = $().find.bind($('.card')); // Awkward
   const theme = {
@@ -21,19 +43,20 @@ async function getThemeFromName(name, {readme} = {}) {
     repo: $('.package-meta li:first-child a').attr('href'),
     author: {
       name: txt(f('.author')),
-      picture: f('img.gravatar').attr('src')
+      image: f('img.gravatar').attr('src')
     },
-    version: txt(f('[aria-label*="version"]')),
     description: txt(f('.card-name')),
     downloads: txt(f('[aria-label*="ownload"]')).replace(',', ''),
     stars: txt(f('.package-card .social-count')),
     images: $('.readme img').map((i, el) =>
       $(el).attr('data-canonical-src')
-    ).get()
+    ).get().map((url) => {return {url: url}})
   };
 
-  if (readme) theme.readme = await getReadme(theme.author.name, name);
-
+  if (opts.readme) theme.readme = await getReadme(theme.author.name, name);
+  if (opts.images) {
+    theme.images = await Promise.all(theme.images.map(getImageMeta));
+  }
   return theme;
 
   function txt($el) {return $el.text().trim();}

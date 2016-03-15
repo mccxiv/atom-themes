@@ -1,16 +1,19 @@
 {
   "name": "atom-themes",
   "description": "API and scraper to traverse the Atom themes database",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "license": "ISC",
   "main": "./compiled/atom-themes.js",
   "scripts": {
     "autocompile": "babel --watch --plugins transform-runtime --presets es2015,stage-0 -d compiled/ src/"
   },
   "dependencies": {
+    "babel-runtime": "^6.6.1",
     "cheerio": "^0.20.0",
+    "color-thief-jimp": "^2.0.2",
+    "jimp": "^0.2.21",
     "request-promise": "^2.0.1",
-    "babel-runtime": "^6.6.1"
+    "tinycolor2": "^1.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
