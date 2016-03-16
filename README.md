@@ -16,19 +16,21 @@ const themes = require('atom-themes');
 themes.get(input, options);
 ```
 `input`: Number, string or array. Check below for explanations.  
-`options`: Optional configuration object. Sorting only has an effect when fetching pages.  
-`options.sort`: One of `'downloads'`, `'stars'`, `'created_at'`, or `'updated_at'`.  
-`options.direction`: The sorting direction, defaults to `'desc'`.
-`options.readme`: Boolean. Whether or not to grab the repo's readme. Requires more requests.
+`options`: Optional configuration object. Available options depend on the type of input.  
+
 
 ### Fetch theme names on a specific page
 ```js
-themes.get(3).then((names) => console.log(names));
+themes.get(3, opts).then((names) => console.log(names));
 ```
+With options:  
+  - `sort`: One of `'downloads'`, `'stars'`, `'created_at'`, or `'updated_at'`. Default is `'downloads'`
+  - `direction`: One of `'desc'` or `'asc'`. Default is `'desc'`.
+
 In the example above, we obtain an array of theme names from the third page of [atom.io/themes](https://atom.io/themes/).   
 **How many pages are there?** We don't know, you can keep calling this until you receive an empty array. Then you'll know there are no more pages.
 
-### Fetch a theme
+### Fetch a theme by name
 ```js
 themes.get('monokai').then((theme) => console.log(theme));
 ```
@@ -62,7 +64,7 @@ With options:
   - Causes extra network requests.
   - Detects if the image's background is dark or light.
   - The image palette contains 6-10 colors.
-  - :warning: Only supported filetypes will have metadata. (None for svg, gif, etc)
+  - :warning: Only supported filetypes will have metadata. (No metadata for svg, gif, etc...)
 
 
 ```js
