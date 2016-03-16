@@ -68,7 +68,7 @@ With options:
 ```js
 // themes.get('monokai', {readme: true, images: true})
 
-{{
+{
   "name": "seti-ui",
   "repo": "https://github.com/jesseweed/seti-ui",
   "author": {
