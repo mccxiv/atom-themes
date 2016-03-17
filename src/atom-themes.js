@@ -48,8 +48,8 @@ async function getThemeFromName(name, opts = {}) {
       image: f('img.gravatar').attr('src')
     },
     description: txt(f('.card-name')),
-    downloads: txt(f('[aria-label*="ownload"]')).replace(',', ''),
-    stars: txt(f('.package-card .social-count')),
+    downloads: Number(txt(f('[aria-label*="ownload"]')).replace(',', '')),
+    stars: Number(txt(f('.package-card .social-count'))),
     images: $('.readme img').map((i, el) =>
       $(el).attr('data-canonical-src')
     ).get().map((url) => {return {url: url}})

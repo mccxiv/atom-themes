@@ -1,7 +1,7 @@
 {
   "name": "atom-themes",
   "description": "API and scraper to traverse the Atom themes database",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "license": "ISC",
   "main": "./compiled/atom-themes.js",
   "scripts": {
