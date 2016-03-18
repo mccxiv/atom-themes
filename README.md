@@ -35,11 +35,54 @@ In the example above, we obtain an array of theme names from the third page of [
 themes.get('monokai').then((theme) => console.log(theme));
 ```
 
-Sample output:
+Without options:
 ```js
 // themes.get('monokai')
 
 {
+  "name": "monokai",
+  "author": {
+    "name": "kevinsawicki",
+    "image": "https://github.com/kevinsawicki.png",
+    "url": "https://atom.io/users/kevinsawicki"
+  },
+  "repo": "https://github.com/kevinsawicki/monokai",
+  "downloads": 330348,
+  "stars": 658,
+  "images": [
+    {
+      "url": "https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png"
+    }
+  ]
+}
+
+```
+
+With options:  
+- `package: true` - Include package.json as the `package` prop. Requires GitHub API call.
+- `readme: true` - Include the repository's readme. Requires GitHub API call.
+- `images: true` - Include image metadata such as size and colors.
+  - Causes extra network requests.
+  - Detects if the image's background is dark or light.
+  - The image palette contains 6-10 colors.
+  - :warning: Only supported filetypes will have metadata. (No metadata for svg, gif, etc...)
+
+:warning: GitHub throttles unauthenticated requests to 60 per hour :warning:
+
+
+```js
+// themes.get('monokai', {package: true, readme: true, images: true})
+
+{
+  "name": "monokai",
+  "author": {
+    "name": "kevinsawicki",
+    "image": "https://github.com/kevinsawicki.png",
+    "url": "https://atom.io/users/kevinsawicki"
+  },
+  "repo": "https://github.com/kevinsawicki/monokai",
+  "downloads": 330350,
+  "stars": 658,
   "package": {
     "name": "monokai",
     "theme": "syntax",
@@ -52,98 +95,63 @@ Sample output:
       "atom": ">0.39.0"
     }
   },
-  "author": {
-    "name": "kevinsawicki",
-    "image": "https://github.com/kevinsawicki.png",
-    "url": "https://atom.io/users/kevinsawicki"
-  },
-  "downloads": 330325,
-  "stars": 658,
   "images": [
     {
-      "url": "https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png"
-    }
-  ]
-}
-
-
-```
-
-With options:  
-- `readme: true` - Include the repository's readme. Requires extra API call.
-- `images: true` - Include image metadata such as size and colors.
-  - Causes extra network requests.
-  - Detects if the image's background is dark or light.
-  - The image palette contains 6-10 colors.
-  - :warning: Only supported filetypes will have metadata. (No metadata for svg, gif, etc...)
-
-
-```js
-// themes.get('monokai', {readme: true, images: true})
-
-{
-  "package": {
-    "name": "seti-ui",
-    "theme": "ui",
-    "version": "0.9.1",
-    "description": "A dark colored UI theme for Atom with custom file icons.",
-    "license": "MIT",
-    "repository": "https://github.com/jesseweed/seti-ui",
-    "engines": {
-      "atom": ">0.99.0"
-    }
-  },
-  "author": {
-    "name": "jesseweed",
-    "image": "https://github.com/jesseweed.png",
-    "url": "https://atom.io/users/jesseweed"
-  },
-  "downloads": 300232,
-  "stars": 988,
-  "images": [
-    {
-      "url": "https://badges.gitter.im/Join%20Chat.svg"
-    },
-    {
-      "url": "https://github.com/jesseweed/seti-ui/raw/master/screenshot.png",
+      "url": "https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png",
       "dimensions": {
-        "width": 128,
-        "height": 128
+        "width": 1414,
+        "height": 1002
       },
       "background": {
         "isDark": true,
-        "color": {"r": 44, "g": 52, "b": 60}
+        "color": {
+          "r": 37,
+          "g": 45,
+          "b": 37
+        }
       },
       "palette": [
-        {"r": 44, "g": 52, "b": 60},
-        {"r": 190, "g": 215, "b": 180},
-        {"r": 161, "g": 115, "b": 195},
-        {"r": 77, "g": 156, "b": 213},
-        {"r": 94, "g": 133, "b": 175},
-        {"r": 105, "g": 130, "b": 103},
-        {"r": 92, "g": 100, "b": 108}
+        {
+          "r": 37,
+          "g": 45,
+          "b": 37
+        },
+        {
+          "r": 219,
+          "g": 197,
+          "b": 177
+        },
+        {
+          "r": 100,
+          "g": 206,
+          "b": 209
+        },
+        {
+          "r": 114,
+          "g": 120,
+          "b": 106
+        },
+        {
+          "r": 105,
+          "g": 117,
+          "b": 165
+        },
+        {
+          "r": 103,
+          "g": 67,
+          "b": 65
+        },
+        {
+          "r": 72,
+          "g": 75,
+          "b": 98
+        }
       ]
-    }, ...
+    }
   ],
-  "readme": "# Seti UI\n\n[![Join the chat at https://gitter.im/jesseweed/seti-ui](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jesseweed/seti-ui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\nA dark colored UI theme for Atom with custom file icons. [Seti Syntax](https://atom.io/themes/seti-syntax) also available.\n\n![Screenshot](https://github.com/jesseweed/seti-ui/raw/master/screenshot.png)\n\n\n### Custom App Icons\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/circular/circular-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/circular)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/rounded/rounded-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/rounded/)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/squared/squared-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/squared/)\n\n### Installation\n\n#### Atom Package Manager (APM)\n```bash\napm install seti-ui\n```\n\n#### Git clone\n```bash\ncd ~/.atom/packages\ngit clone https://github.com/jesseweed/seti-ui --depth=1\n```\n\n### Currently Supported File Icons\n* Bower\n* Coffescript\n* CSS\n* EJS\n* Favicon\n* Go\n* Grunt\n* Gulp\n* Handlebars\n* HTML\n* Image\n* Jade\n* Javascript\n* JSON\n* Julia\n* Less\n* LICENSE\n* Markdown\n* Mustache\n* PHP\n* Procfile\n* Python\n* React\n* Ruby\n* Sass\n* Stache\n* Stylus\n* Text\n* Typescript\n* XML\n* YML\n"
+  "readme": "# Monokai theme\n\nA monokai syntax theme for Atom.\n\nOriginally converted from the [TextMate](http://www.monokai.nl/blog/wp-content/asdev/Monokai.tmTheme)\ntheme using the [TextMate bundle converter](http://atom.io/docs/latest/converting-a-text-mate-theme).\n\n![](https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png)\n"
 }
 ```
-
----
-
-## ⚛ Other helpers
-
-### Fetch a list of themes
-```js
-const fetcher = themes.get(['monokai', 'seti-ui']);
-
-fetcher.on('theme', (theme) => console.log(theme));
-fetcher.on('done', () => console.log('Finished fetching.'));
-```
-Passing an array will return an event emitter object. Listen to its `theme` and `done` events. The `theme` event will fire for each fetched theme object.  
-Objects will be fetched sequentially, not in parallel.  
-The order in which the events fire is predictable.  
-For long lists such as fetching the entire database, this operation will obviously take a long time.
 
 ---
 
