@@ -37,17 +37,36 @@ async function getImageMeta({url}) {
   }
 }
 
+async function getPackageDotJson(user, repo) {
+  const domain = 'https://raw.githubusercontent.com';
+  return await request.get({
+    url: `${domain}/${user}/${repo}/master/package.json`,
+    json: true
+  });
+}
+
+function getRepoUrlSection(url, section) {
+  const arr = url.split('');
+  if (arr[arr.length-1] === '/') arr.pop();
+  const repoUrl = arr.join('');
+  const sections = repoUrl.split('/');
+  if (section === 'user') return sections[sections.length-2];
+  if (section === 'repo') return sections.pop();
+}
+
 async function getThemeFromName(name, opts = {}) {
   const $ = await getDom(`https://atom.io/themes/${name}`);
   const f = $().find.bind($('.card')); // Awkward
+  const repoUrl = $('.package-meta li:first-child a').attr('href');
+  const repoUsername = getRepoUrlSection(repoUrl, 'user');
+  const repoName = getRepoUrlSection(repoUrl, 'repo');
   const theme = {
-    name,
-    repo: $('.package-meta li:first-child a').attr('href'),
+    package: await getPackageDotJson(repoUsername, repoName),
     author: {
       name: txt(f('.author')),
-      image: f('img.gravatar').attr('src')
+      image: f('img.gravatar').attr('src'),
+      url: 'https://atom.io' + f('.author').attr('href')
     },
-    description: txt(f('.card-name')),
     downloads: Number(txt(f('[aria-label*="ownload"]')).replace(',', '')),
     stars: Number(txt(f('.package-card .social-count'))),
     images: $('.readme img').map((i, el) =>
@@ -55,7 +74,7 @@ async function getThemeFromName(name, opts = {}) {
     ).get().map((url) => {return {url: url}})
   };
 
-  if (opts.readme) theme.readme = await getReadme(theme.author.name, name);
+  if (opts.readme) theme.readme = await getReadme(repoUsername, repoName);
   if (opts.images) {
     theme.images = await Promise.all(theme.images.map(getImageMeta));
   }

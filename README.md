@@ -40,21 +40,32 @@ Sample output:
 // themes.get('monokai')
 
 {
-  "name": "monokai",
-  "repo": "https://github.com/kevinsawicki/monokai",
+  "package": {
+    "name": "monokai",
+    "theme": "syntax",
+    "version": "0.18.0",
+    "private": true,
+    "description": "A monokai theme",
+    "repository": "https://github.com/kevinsawicki/monokai",
+    "license": "MIT",
+    "engines": {
+      "atom": ">0.39.0"
+    }
+  },
   "author": {
     "name": "kevinsawicki",
-    "image": "https://github.com/kevinsawicki.png"
+    "image": "https://github.com/kevinsawicki.png",
+    "url": "https://atom.io/users/kevinsawicki"
   },
-  "description": "monokai",
-  "downloads": 329933,
-  "stars": 657,
+  "downloads": 330325,
+  "stars": 658,
   "images": [
     {
       "url": "https://f.cloud.github.com/assets/671378/2265671/d02ebee8-9e85-11e3-9b8c-12b2cb7015e3.png"
     }
   ]
 }
+
 
 ```
 
@@ -71,15 +82,24 @@ With options:
 // themes.get('monokai', {readme: true, images: true})
 
 {
-  "name": "seti-ui",
-  "repo": "https://github.com/jesseweed/seti-ui",
+  "package": {
+    "name": "seti-ui",
+    "theme": "ui",
+    "version": "0.9.1",
+    "description": "A dark colored UI theme for Atom with custom file icons.",
+    "license": "MIT",
+    "repository": "https://github.com/jesseweed/seti-ui",
+    "engines": {
+      "atom": ">0.99.0"
+    }
+  },
   "author": {
     "name": "jesseweed",
-    "image": "https://github.com/jesseweed.png"
+    "image": "https://github.com/jesseweed.png",
+    "url": "https://atom.io/users/jesseweed"
   },
-  "description": "seti-ui",
-  "downloads": 298692,
-  "stars": 980,
+  "downloads": 300232,
+  "stars": 988,
   "images": [
     {
       "url": "https://badges.gitter.im/Join%20Chat.svg"
@@ -87,28 +107,26 @@ With options:
     {
       "url": "https://github.com/jesseweed/seti-ui/raw/master/screenshot.png",
       "dimensions": {
-        "width": 881,
-        "height": 852
+        "width": 128,
+        "height": 128
       },
       "background": {
         "isDark": true,
-        "color": {"r": 20, "g": 21, "b": 26}
+        "color": {"r": 44, "g": 52, "b": 60}
       },
       "palette": [
-        {"r": 20, "g": 20, "b": 26},
-        {"r": 182, "g": 165, "b": 142},
-        {"r": 87, "g": 165, "b": 193},
-        {"r": 70, "g": 92 ,"b": 113},
-        {"r": 76, "g": 121, "b": 159},
-        {"r": 104, "g": 71, "b": 45},
-        {"r": 70, "g": 87, "b": 74}
+        {"r": 44, "g": 52, "b": 60},
+        {"r": 190, "g": 215, "b": 180},
+        {"r": 161, "g": 115, "b": 195},
+        {"r": 77, "g": 156, "b": 213},
+        {"r": 94, "g": 133, "b": 175},
+        {"r": 105, "g": 130, "b": 103},
+        {"r": 92, "g": 100, "b": 108}
       ]
-    },
-    ...
+    }, ...
   ],
   "readme": "# Seti UI\n\n[![Join the chat at https://gitter.im/jesseweed/seti-ui](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jesseweed/seti-ui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\nA dark colored UI theme for Atom with custom file icons. [Seti Syntax](https://atom.io/themes/seti-syntax) also available.\n\n![Screenshot](https://github.com/jesseweed/seti-ui/raw/master/screenshot.png)\n\n\n### Custom App Icons\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/circular/circular-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/circular)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/rounded/rounded-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/rounded/)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/master/_icons/squared/squared-128x128.png) ](https://github.com/jesseweed/seti-syntax/tree/master/_icons/squared/)\n\n### Installation\n\n#### Atom Package Manager (APM)\n```bash\napm install seti-ui\n```\n\n#### Git clone\n```bash\ncd ~/.atom/packages\ngit clone https://github.com/jesseweed/seti-ui --depth=1\n```\n\n### Currently Supported File Icons\n* Bower\n* Coffescript\n* CSS\n* EJS\n* Favicon\n* Go\n* Grunt\n* Gulp\n* Handlebars\n* HTML\n* Image\n* Jade\n* Javascript\n* JSON\n* Julia\n* Less\n* LICENSE\n* Markdown\n* Mustache\n* PHP\n* Procfile\n* Python\n* React\n* Ruby\n* Sass\n* Stache\n* Stylus\n* Text\n* Typescript\n* XML\n* YML\n"
 }
-
 ```
 
 ---
