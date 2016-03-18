@@ -16,7 +16,12 @@ async function getReadme(owner, repo) {
 }
 
 async function getImageMeta({url}) {
-  try {var img = await Jimp.read(url);}
+  let img;
+  try {
+    // More strict timeout with these unknown urls.
+    img = await request({url, timeout: 60000, encoding: null});
+    img = await Jimp.read(img);
+  }
   catch(e) {return arguments[0]}
 
   const rgb = ColorThief.getColor(img);
@@ -96,7 +101,6 @@ async function getNamesFromPage(page, {sort, direction} = {}) {
   // Can't have multiple default properties inside of parameter object :(
   sort = sort || 'downloads';
   direction = direction || 'desc';
-  console.log(sort, direction);
   const url = 'https://atom.io/themes/list';
   const query = {page, sort, direction};
   const $ = await getDom(url, query);
