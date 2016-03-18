@@ -64,13 +64,13 @@ With options:
   - The `readme` property and any property beginning with `_` are removed.
 - `readme: true` - Include the repository's readme.
   - Requires GitHub API call.
+  - :warning: GitHub throttles unauthenticated requests to 60 per hour
 - `images: true` - Include image metadata such as size and colors.
   - Causes extra network requests.
   - Detects if the image's background is dark or light.
   - The image palette contains 6-10 colors.
   - :warning: Only supported filetypes will have metadata. (No metadata for svg, gif, etc...)
 
-:warning: GitHub throttles unauthenticated requests to 60 per hour :warning:
 
 
 ```js
