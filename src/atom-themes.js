@@ -3,7 +3,6 @@ import cheerio from 'cheerio';
 import Jimp from 'jimp';
 import ColorThief from 'color-thief-jimp';
 import TinyColor from 'tinycolor2';
-import EventEmitter from 'events';
 
 function getDom(uri, qs = {}) {
   return request({uri, qs, transform: (body) => cheerio.load(body)});
@@ -58,23 +57,27 @@ async function getThemeFromName(name, opts = {}) {
   const $ = await getDom(`https://atom.io/themes/${name}`);
   const f = $().find.bind($('.card')); // Awkward
   const repoUrl = $('.package-meta li:first-child a').attr('href');
-  const repoUsername = getRepoUrlSection(repoUrl, 'user');
-  const repoName = getRepoUrlSection(repoUrl, 'repo');
+  const ghUser = getRepoUrlSection(repoUrl, 'user');
+  const ghRepo = getRepoUrlSection(repoUrl, 'repo');
   const theme = {
-    package: await getPackageDotJson(repoUsername, repoName),
+    name,
     author: {
       name: txt(f('.author')),
       image: f('img.gravatar').attr('src'),
       url: 'https://atom.io' + f('.author').attr('href')
     },
+    repo: repoUrl,
     downloads: Number(txt(f('[aria-label*="ownload"]')).replace(',', '')),
     stars: Number(txt(f('.package-card .social-count'))),
+    package: 'placeholder',
     images: $('.readme img').map((i, el) =>
       $(el).attr('data-canonical-src')
     ).get().map((url) => {return {url: url}})
   };
 
-  if (opts.readme) theme.readme = await getReadme(repoUsername, repoName);
+  if (opts.package) theme.package = await getPackageDotJson(ghUser, ghRepo);
+  else delete theme.package;
+  if (opts.readme) theme.readme = await getReadme(ghUser, ghRepo);
   if (opts.images) {
     theme.images = await Promise.all(theme.images.map(getImageMeta));
   }
@@ -94,26 +97,9 @@ async function getNamesFromPage(page, {sort, direction} = {}) {
   return $('.card .card-name').map((i, el) => $(el).text().trim()).get();
 }
 
-function getThemesFromNames(names, opts) {
-  const ee = new EventEmitter();
-  sequential(names.slice());
-  return ee;
-
-  async function sequential(toFetch) {
-    if (toFetch.length) {
-      const theme = await getThemeFromName(toFetch[0], opts);
-      ee.emit('theme', theme);
-      toFetch.shift();
-      sequential(toFetch);
-    }
-    else setTimeout(() => ee.emit('done'), 0);
-  }
-}
-
 function get(input, opts) {
   if (typeof input === 'number') return getNamesFromPage(input, opts);
   if (typeof input === 'string') return getThemeFromName(input, opts);
-  if (Array.isArray(input)) return getThemesFromNames(input, opts);
   else throw Error('Invalid parameter for atom-themes .get()');
 }
 
