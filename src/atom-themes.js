@@ -38,10 +38,16 @@ async function getImageMeta({url}) {
 
 async function getPackageDotJson(user, repo) {
   const domain = 'https://raw.githubusercontent.com';
-  return await request.get({
+  const json = await request.get({
     url: `${domain}/${user}/${repo}/master/package.json`,
     json: true
   });
+  
+  delete json.readme;
+  Object.keys(json).forEach((key) => {
+    if (key.split('').shift() === '_') delete json[key];
+  });
+  return json;
 }
 
 function getRepoUrlSection(url, section) {

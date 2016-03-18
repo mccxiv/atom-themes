@@ -59,8 +59,11 @@ Without options:
 ```
 
 With options:  
-- `package: true` - Include package.json as the `package` prop. Requires GitHub API call.
-- `readme: true` - Include the repository's readme. Requires GitHub API call.
+- `package: true` - Include package.json as the `package` prop.
+  - Causes extra request.
+  - The `readme` property and any property beginning with `_` are removed.
+- `readme: true` - Include the repository's readme.
+  - Requires GitHub API call.
 - `images: true` - Include image metadata such as size and colors.
   - Causes extra network requests.
   - Detects if the image's background is dark or light.
