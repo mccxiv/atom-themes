@@ -1,4 +1,5 @@
 # Yay, it's the atom-themes library!
+#### Used by [atomthemes.io](http://atomthemes.io/)!
 Obtain info on the available themes for the Atom editor.
 
 ## ⚛ Installation
